@@ -1,25 +1,17 @@
-pipeline{
-    angent any
-    stages{
-        stages('Clone Repository'){
-            steps{
-                script{
-                    
-                }
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building the application'
             }
         }
-        stages('Build and deploy'){
-            steps{
-                script{
-                    sh 'echo "Building the applicatiom"
-                    sh 'docker-compose down'
-                    sh 'docker-compose build -d
-                }
-            }
-        }
-        post{
-            always{
-                echo 'pipeline is ecuction compltw.'
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying the application using Docker Compose'
+                sh 'docker-compose up -d'
             }
         }
     }
